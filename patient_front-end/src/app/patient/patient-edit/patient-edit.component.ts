@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PatientService} from '../patient.service';
 import {PatienterService} from '../patienter.service';
 import {Patienter} from '../patienter';
 import {Patient} from '../patient';
+import {checkDay, checkEnd, checkStart} from '../../../checkDate';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient-list-edit',
@@ -21,23 +23,24 @@ export class PatientEditComponent implements OnInit {
 
   constructor(private patientService: PatientService,
               private patienterService: PatienterService,
+              private toast: ToastrService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
       this.patientService.findById(this.id).subscribe(patient => {
         this.patientForm = new FormGroup({
-          id: new FormControl(patient.id),
-          patientId: new FormControl(patient.patientId),
-          idPatient: new FormControl(patient.patienter.id),
-          patienterId: new FormControl(patient.patienter.patienterId),
-          patienterName: new FormControl(patient.patienter.patienterName),
-          hospitalize: new FormControl(patient.hospitalize),
-          discharge: new FormControl(patient.discharge),
-          reason: new FormControl(patient.reason),
-          treatments: new FormControl(patient.treatments),
-          doctor: new FormControl(patient.doctor)
-        });
+          id: new FormControl(patient.id, [Validators.required]),
+          patientId: new FormControl(patient.patientId, [Validators.required]),
+          idPatient: new FormControl(patient.patienter.id, [Validators.required]),
+          patienterId: new FormControl(patient.patienter.patienterId, [Validators.required]),
+          patienterName: new FormControl(patient.patienter.patienterName, [Validators.required, Validators.pattern('^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$')]),
+          hospitalize: new FormControl(patient.hospitalize, [Validators.required, checkStart]),
+          discharge: new FormControl(patient.discharge, [Validators.required, checkEnd]),
+          reason: new FormControl(patient.reason, [Validators.required]),
+          treatments: new FormControl(patient.treatments, [Validators.required]),
+          doctor: new FormControl(patient.doctor, [Validators.required])
+        }, checkDay);
       });
     });
   }
@@ -55,7 +58,6 @@ export class PatientEditComponent implements OnInit {
   editPatient(id: number): void {
     let patient: Patient;
 
-    // const patient = this.patientForm.value;
     this.patienterService.findById(this.patientForm.value.patienter).subscribe(patienter => {
       patienter = {
         id: this.patientForm.value.id,
@@ -79,7 +81,7 @@ export class PatientEditComponent implements OnInit {
       });
       this.patientService.editPatient(id, patient).subscribe(() => {
         this.router.navigate(['/']);
-        // this.toast.success('Edited Customer Success..', 'Notification..');
+        this.toast.success('Edit Patient Success..', 'Notification..');
       }, e => {
         console.log(e);
       });

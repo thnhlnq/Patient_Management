@@ -22,7 +22,6 @@ public class Patient {
     private String treatments;
     private String doctor;
 
-
     public Patient() {
     }
 

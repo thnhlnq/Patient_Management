@@ -31,28 +31,11 @@ public interface IPatientRepository extends JpaRepository<Patient, Integer> {
     @Modifying
     @Query(value = "delete from patient where id = :id", nativeQuery = true)
     void delete(@Param("id") Integer id);
-//
-//    @Query(value = "select * from blog where name like :nameFind", nativeQuery = true)
-//    Page<Blog> findByNameContaining(@Param("nameFind") String nameFind, Pageable pageable);
 
-//    @Query(value = "select * from patient", nativeQuery = true)
-//    List<Patient> findAll();
-//
-//    @Query(value = "select * from patient where id = :id", nativeQuery = true)
-//    Optional<Patient> findById(@Param("id") Integer id);
-//
-//    @Modifying
-//    @Transactional
-//    @Query(value = "insert into patient(patienter_id, day_in, day_out, reason, method, doctor) values (:patienterId, :dayIn, :dayOut, :reason, :method, :doctor );", nativeQuery = true)
-//    void save(@Param("patienterId") Integer patienterId, @Param("dayIn") LocalDate dayIn, @Param("dayOut") LocalDate dayOut, @Param("reason") String reason, @Param("method") String method, @Param("doctor") String doctor);
-//
-//    @Transactional
-//    @Modifying
-//    @Query(value = "update patient set day_in = :dayIn, day_out = :dayOut, reason = :reason, method = :method, doctor = :doctor where id = :id", nativeQuery = true)
-//    void update(@Param("dayIn") LocalDate dayIn, @Param("dayOut") LocalDate dayOut, @Param("reason") String reason, @Param("method") String method, @Param("doctor") String doctor, @Param("id") Integer id);
-//
-//    @Modifying
-//    @Transactional
-//    @Query(value = "delete from patient where id = :id", nativeQuery = true)
-//    void delete(@Param("id") Integer id);
+    @Query(value = "select * from patient limit :page, 5", nativeQuery = true)
+    List<Patient> page(@Param("page") Integer page);
+
+    @Query(value = "select patient.* from patient join patienter on patient.patienter_id = patienter.id where patienter.patienter_name like :patienter_name or patient.reason like :reason or patient.treatments like :treatments or patient.doctor like :doctor limit :page, 5", nativeQuery = true)
+    List<Patient> search(@Param("patienter_name") String patienter_name, @Param("reason") String reason, @Param("treatments") String treatments, @Param("doctor") String doctor, @Param("page") Integer page);
+
 }

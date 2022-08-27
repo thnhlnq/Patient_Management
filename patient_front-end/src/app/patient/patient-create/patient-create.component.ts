@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {Patienter} from '../patienter';
 import {PatientService} from '../patient.service';
 import {PatienterService} from '../patienter.service';
+import {checkDay, checkEnd, checkStart} from '../../../checkDate';
 
 @Component({
   selector: 'app-patient-create',
@@ -17,12 +18,12 @@ export class PatientCreateComponent implements OnInit {
     id: new FormControl(''),
     patientId: new FormControl('', [Validators.required]),
     patienter: new FormControl('', [Validators.required]),
-    hospitalize: new FormControl('', [Validators.required]),
-    discharge: new FormControl('', [Validators.required]),
+    hospitalize: new FormControl('', [Validators.required, checkStart]),
+    discharge: new FormControl('', [Validators.required, checkEnd]),
     reason: new FormControl('', [Validators.required]),
     treatments: new FormControl('', [Validators.required]),
     doctor: new FormControl('', [Validators.required])
-  });
+  }, checkDay);
 
   patienters: Patienter[] = [];
 

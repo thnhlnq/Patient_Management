@@ -17,4 +17,7 @@ public interface IPatientService {
 
     void delete(Integer id);
 
+    List<Patient> page(Integer page);
+
+    List<Patient> search(String patienter, String reason, String treatments, String doctor, Integer page);
 }

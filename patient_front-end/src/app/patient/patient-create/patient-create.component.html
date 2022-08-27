@@ -10,17 +10,16 @@
           <td>
             <div class="input-group flex-nowrap">
               <span class="input-group-text">Patient Id <i>&nbsp;*</i></span>
-              <input type="text" class="form-control" placeholder="" formControlName="patientId"><br>
+              <input type="text" class="form-control" placeholder="Enter Patient Id" formControlName="patientId"><br>
             </div>
           </td>
         </tr>
 
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <p *ngIf="patientForm.controls.name.hasError('required') && customerForm.controls.name.touched">Name Can't Be Blank</p>-->
-<!--            <p *ngIf="patientForm.controls.name.hasError('pattern') && customerForm.controls.name.touched">Name Incorrect Format</p>-->
-<!--          </td>-->
-<!--        </tr>-->
+        <tr>
+          <td>
+            <p *ngIf="patientForm.controls.patientId.hasError('required') && patientForm.controls.patientId.touched && patientForm.controls.patientId.dirty">Patient Id Can't Be Blank</p>
+          </td>
+        </tr>
 
         <tr>
           <td>
@@ -36,12 +35,11 @@
           </td>
         </tr>
 
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <p *ngIf="customerForm.controls.dateOfBirth.hasError('required') && customerForm.controls.dateOfBirth.touched">Date Of Birth Can't Be Blank</p>-->
-<!--            <p *ngIf="customerForm.controls.dateOfBirth.hasError('checkAge') && customerForm.controls.dateOfBirth.touched">Date Of Birth Incorrect Format</p>-->
-<!--          </td>-->
-<!--        </tr>-->
+        <tr>
+          <td>
+            <p *ngIf="patientForm.controls.patienter.hasError('required') && patientForm.controls.patienter.touched && patientForm.controls.patienter.dirty">Patienter Can't Be Blank</p>
+          </td>
+        </tr>
 
         <tr>
           <td>
@@ -49,6 +47,14 @@
               <span class="input-group-text">Hospitalize <i>&nbsp;*</i></span>
               <input type="date" class="form-control" formControlName="hospitalize"><br>
             </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p *ngIf="patientForm.controls.hospitalize.hasError('required') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.hospitalize.hasError('checkStart') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Must < Current Date</p>
+            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Must < Discharge</p>
           </td>
         </tr>
 
@@ -63,10 +69,24 @@
 
         <tr>
           <td>
+            <p *ngIf="patientForm.controls.discharge.hasError('required') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.discharge.hasError('checkEnd') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Must < Current Date</p>
+            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Must > Hospitalize</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
             <div class="input-group flex-nowrap">
               <span class="input-group-text">Reason <i>&nbsp;*</i></span>
               <input type="text" class="form-control" formControlName="reason"><br>
             </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p *ngIf="patientForm.controls.reason.hasError('required') && patientForm.controls.reason.touched && patientForm.controls.reason.dirty">Reason Can't Be Blank</p>
           </td>
         </tr>
 
@@ -81,6 +101,12 @@
 
         <tr>
           <td>
+            <p *ngIf="patientForm.controls.treatments.hasError('required') && patientForm.controls.treatments.touched && patientForm.controls.treatments.dirty">Treatments Can't Be Blank</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
             <div class="input-group flex-nowrap">
               <span class="input-group-text">Doctor <i>&nbsp;*</i></span>
               <input type="text" class="form-control" formControlName="doctor"><br>
@@ -88,11 +114,11 @@
           </td>
         </tr>
 
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <p *ngIf="customerForm.controls.customerType.hasError('required') && customerForm.controls.customerType.touched">Customer Type Can't Be Blank</p>-->
-<!--          </td>-->
-<!--        </tr>-->
+        <tr>
+          <td>
+            <p *ngIf="patientForm.controls.doctor.hasError('required') && patientForm.controls.doctor.touched && patientForm.controls.doctor.dirty">Doctor Can't Be Blank</p>
+          </td>
+        </tr>
 
         <tr>
           <td style="padding: 20px">

@@ -40,4 +40,14 @@ public class PatientService implements IPatientService {
         patientRepository.deleteById(id);
     }
 
+    @Override
+    public List<Patient> page(Integer page) {
+        return patientRepository.page(page);
+    }
+
+    @Override
+    public List<Patient> search(String patienter, String reason, String treatments, String doctor, Integer page) {
+        return patientRepository.search("%" + patienter + "%", "%" + reason + "%", "%" + treatments + "%", "%" + doctor + "%", page);
+    }
+
 }

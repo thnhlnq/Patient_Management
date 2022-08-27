@@ -2,6 +2,7 @@ package com.patient.controller;
 
 import com.patient.model.Patient;
 import com.patient.service.IPatientService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,13 +44,14 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Patient> edit(@PathVariable Integer id, @RequestBody Patient patient) {
+    public ResponseEntity edit(@PathVariable Integer id, @RequestBody Patient patient) {
         Optional<Patient> patients = patientService.findById(id);
         if (!patients.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        patientService.edit(patient);
-        return new ResponseEntity<>(patient, HttpStatus.OK);
+        BeanUtils.copyProperties(patient, patients);
+        patientService.edit(patients.get());
+        return new ResponseEntity(patients, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
