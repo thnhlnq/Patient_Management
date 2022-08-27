@@ -1,0 +1,104 @@
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <h1 class="pt-5">Edit Patient</h1>
+    </div>
+    <form [formGroup]="patientForm" style="text-align: center">
+      <table style="display: inline-grid;">
+        <tbody>
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Patient Id <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" disabled formControlName="patientId"><br>
+            </div>
+          </td>
+        </tr>
+
+        <!--        <tr>-->
+        <!--          <td>-->
+        <!--            <div class="input-group flex-nowrap">-->
+        <!--              <span class="input-group-text">Patienter Id <i>&nbsp;*</i></span>-->
+        <!--              <input type="text" class="form-control" disabled formControlName="patienterId"><br>-->
+        <!--            </div>-->
+        <!--          </td>-->
+        <!--        </tr>-->
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Patienter Id <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="patienterId"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Patient Name <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="patienterName"><br>
+            </div>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Hospitalize <i>&nbsp;*</i></span>
+              <input type="date" class="form-control" formControlName="hospitalize"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Discharge <i>&nbsp;*</i></span>
+              <input type="date" class="form-control" formControlName="discharge"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Reason <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="reason"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Treatments <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="treatments"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Doctor <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="doctor"><br>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 20px">
+            <div class="vstack" style="display: inline">
+              <button style="border: none; background: none" class="m-5" [disabled]="!patientForm.valid" (click)="editPatient(id)">Edit
+              </button>
+              <a class="m-5" routerLink="/">Cancel</a>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</div>
