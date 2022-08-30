@@ -19,6 +19,12 @@ export class PatientListComponent implements OnInit {
 
   patientId: string;
 
+  nameSearch1 = '';
+
+  nameSearch2 = '';
+
+  page = 1;
+
   constructor(private patientService: PatientService,
               private patienterService: PatienterService) {
   }
@@ -46,6 +52,15 @@ export class PatientListComponent implements OnInit {
       this.getAll();
     }, e => {
       console.log(e);
+    });
+  }
+
+  searchPatient() {
+    return this.patientService.searchPatient(this.nameSearch1, this.nameSearch2).subscribe(listSearch => {
+      this.patients = listSearch;
+      this.nameSearch1 = '';
+      this.nameSearch2 = '';
+      this.page = 1;
     });
   }
 }

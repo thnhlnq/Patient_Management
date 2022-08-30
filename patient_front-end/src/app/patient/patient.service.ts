@@ -33,4 +33,8 @@ export class PatientService {
   deletePatient(id: number): Observable<Patient> {
     return this.http.delete<Patient>(`${API_URL}/patient/${id}`);
   }
+
+  searchPatient(name1: string, name2: string): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${API_URL}/patient?name_like=` + name1 + '&patienter.patienterName_like=' + name2);
+  }
 }

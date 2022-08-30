@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {ToastrModule} from 'ngx-toastr';
 import {HeaderComponent} from './header/header.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {HeaderComponent} from './header/header.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgxPaginationModule,
     ReactiveFormsModule,

@@ -1,9 +1,9 @@
 <div class="container-xxl py-5">
-  <div class="container" style="text-align: center">
-    <div class=" row text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-      <h1>Create Patient</h1>
+  <div class="container">
+    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+      <h1 class="pt-5">Create Patient</h1>
     </div>
-    <form [formGroup]="patientForm">
+    <form [formGroup]="patientForm" style="text-align: center">
       <table style="display: inline-grid">
         <tbody>
         <tr>
@@ -17,7 +17,7 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.patientId.hasError('required') && patientForm.controls.patientId.touched && patientForm.controls.patientId.dirty">Patient Id Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.patientId.hasError('required') && patientForm.controls.patientId.touched">Patient Id Can't Be Blank</p>
           </td>
         </tr>
 
@@ -37,7 +37,7 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.patienter.hasError('required') && patientForm.controls.patienter.touched && patientForm.controls.patienter.dirty">Patienter Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.patienter.hasError('required') && patientForm.controls.patienter.touched">Patienter Can't Be Blank</p>
           </td>
         </tr>
 
@@ -52,9 +52,9 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.hospitalize.hasError('required') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Can't Be Blank</p>
-            <p *ngIf="patientForm.controls.hospitalize.hasError('checkStart') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Must < Current Date</p>
-            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.hospitalize.touched && patientForm.controls.hospitalize.dirty">Hospitalize Must < Discharge</p>
+            <p *ngIf="patientForm.controls.hospitalize.hasError('required') && patientForm.controls.hospitalize.touched">Hospitalize Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.hospitalize.hasError('checkStart') && patientForm.controls.hospitalize.touched">Hospitalize Must < Current Date</p>
+            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.hospitalize.touched">Hospitalize Must < Discharge</p>
           </td>
         </tr>
 
@@ -69,9 +69,9 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.discharge.hasError('required') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Can't Be Blank</p>
-            <p *ngIf="patientForm.controls.discharge.hasError('checkEnd') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Must < Current Date</p>
-            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.discharge.touched && patientForm.controls.discharge.dirty">Discharge Must > Hospitalize</p>
+            <p *ngIf="patientForm.controls.discharge.hasError('required') && patientForm.controls.discharge.touched">Discharge Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.discharge.hasError('checkEnd') && patientForm.controls.discharge.touched">Discharge Must < Current Date</p>
+            <p *ngIf="patientForm.hasError('checkDate') && patientForm.controls.discharge.touched">Discharge Must > Hospitalize</p>
           </td>
         </tr>
 
@@ -86,7 +86,7 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.reason.hasError('required') && patientForm.controls.reason.touched && patientForm.controls.reason.dirty">Reason Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.reason.hasError('required') && patientForm.controls.reason.touched">Reason Can't Be Blank</p>
           </td>
         </tr>
 
@@ -101,7 +101,7 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.treatments.hasError('required') && patientForm.controls.treatments.touched && patientForm.controls.treatments.dirty">Treatments Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.treatments.hasError('required') && patientForm.controls.treatments.touched">Treatments Can't Be Blank</p>
           </td>
         </tr>
 
@@ -116,7 +116,7 @@
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.doctor.hasError('required') && patientForm.controls.doctor.touched && patientForm.controls.doctor.dirty">Doctor Can't Be Blank</p>
+            <p *ngIf="patientForm.get('doctor').hasError('required') && patientForm.get('doctor').touched">Doctor Can't Be Blank</p>
           </td>
         </tr>
 

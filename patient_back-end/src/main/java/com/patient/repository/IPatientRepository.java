@@ -19,14 +19,14 @@ public interface IPatientRepository extends JpaRepository<Patient, Integer> {
 
     @Modifying
     @Query(value = "insert into patient (patient_id, patienter_id, hospitalize, discharge, reason, treatments, doctor) values (:patientId, :patienterId, :hospitalize, :discharge, :reason, :treatments, :doctor)", nativeQuery = true)
-    void save(@Param("patientId") String patientId, @Param("patienterId") String patienterId, @Param("hospitalize") LocalDate hospitalize, @Param("discharge") LocalDate discharge, @Param("reason") String reason, @Param("treatments") String treatments, @Param("doctor") String doctor);
+    void save(@Param("patientId") String patientId, @Param("patienterId") Integer patienterId, @Param("hospitalize") LocalDate hospitalize, @Param("discharge") LocalDate discharge, @Param("reason") String reason, @Param("treatments") String treatments, @Param("doctor") String doctor);
 
     @Query(value = "select * from patient where id = :id", nativeQuery = true)
     Optional<Patient> findById(@Param("id") Integer id);
 
     @Modifying
     @Query(value = "update patient set patient_id = :patientId, patienter_id = :patienterId, hospitalize = :hospitalize, discharge = :discharge, reason = :reason, treatments = :treatments, doctor = :doctor where id = :id", nativeQuery = true)
-    void edit(@Param("patientId") String patientId, @Param("patienterId") String patienterId, @Param("hospitalize") LocalDate hospitalize, @Param("discharge") LocalDate discharge, @Param("reason") String reason, @Param("treatments") String treatments, @Param("doctor") String doctor, @Param("id") Integer id);
+    void edit(@Param("patientId") String patientId, @Param("patienterId") Integer patienterId, @Param("hospitalize") LocalDate hospitalize, @Param("discharge") LocalDate discharge, @Param("reason") String reason, @Param("treatments") String treatments, @Param("doctor") String doctor, @Param("id") Integer id);
 
     @Modifying
     @Query(value = "delete from patient where id = :id", nativeQuery = true)

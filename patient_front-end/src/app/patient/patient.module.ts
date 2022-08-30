@@ -6,6 +6,7 @@ import {PatientListComponent} from './patient-list/patient-list.component';
 import {PatientEditComponent} from './patient-edit/patient-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PatientCreateComponent} from './patient-create/patient-create.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import {PatientCreateComponent} from './patient-create/patient-create.component'
     PatientCreateComponent,
     PatientEditComponent
   ],
-  imports: [
-    CommonModule,
-    PatientRoutingModule,
-    ReactiveFormsModule
-  ]
+    imports: [
+        CommonModule,
+        PatientRoutingModule,
+        ReactiveFormsModule,
+        NgxPaginationModule
+    ]
 })
 export class PatientModule { }

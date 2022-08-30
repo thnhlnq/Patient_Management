@@ -44,14 +44,14 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity edit(@PathVariable Integer id, @RequestBody Patient patient) {
+    public ResponseEntity<Patient> edit(@PathVariable Integer id, @RequestBody Patient patient) {
         Optional<Patient> patients = patientService.findById(id);
         if (!patients.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        BeanUtils.copyProperties(patient, patients);
+        BeanUtils.copyProperties(patient, patients.get());
         patientService.edit(patients.get());
-        return new ResponseEntity(patients, HttpStatus.OK);
+        return new ResponseEntity<>(patients.get(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

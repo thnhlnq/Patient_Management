@@ -2,6 +2,7 @@ package com.patient.controller;
 
 import com.patient.model.Patienter;
 import com.patient.service.IPatienterService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class PatienterController {
         return new ResponseEntity<>(patienter, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<Patienter> save(@RequestBody Patienter patienter) {
+        patienterService.save(patienter);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Patienter>> findById(@PathVariable Integer id) {
         Optional<Patienter> patienter = patienterService.findById(id);
@@ -36,19 +43,14 @@ public class PatienterController {
         return new ResponseEntity<>(patienter, HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity save(@RequestBody Patienter patienter) {
-//        patienterService.save(patienter);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Patienter> update(@PathVariable Integer id, @RequestBody Patienter patienter) {
-//        Optional<Patienter> patienters = patienterService.findById(id);
-//        if (!patienters.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        }
-//        patienterService.edit(patienters);
-//        return new ResponseEntity<>(patienters, HttpStatus.OK);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Patienter> update(@PathVariable Integer id, @RequestBody Patienter patienter) {
+        Optional<Patienter> patienters = patienterService.findById(id);
+        if (!patienters.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        BeanUtils.copyProperties(patienter, patienters.get());
+        patienterService.edit(patienters.get());
+        return new ResponseEntity<>(patienters.get(), HttpStatus.OK);
+    }
 }

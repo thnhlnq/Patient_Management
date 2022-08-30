@@ -21,7 +21,17 @@ public class PatienterService implements IPatienterService {
     }
 
     @Override
+    public void save(Patienter patienter) {
+        patienterRepository.save(patienter.getPatienterId(), patienter.getPatienterName());
+    }
+
+    @Override
     public Optional<Patienter> findById(Integer id) {
         return patienterRepository.findById(id);
+    }
+
+    @Override
+    public void edit(Patienter patienter) {
+        patienterRepository.edit(patienter.getPatienterId(), patienter.getPatienterName(), patienter.getId());
     }
 }

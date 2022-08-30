@@ -32,7 +32,7 @@ export class PatientEditComponent implements OnInit {
         this.patientForm = new FormGroup({
           id: new FormControl(patient.id, [Validators.required]),
           patientId: new FormControl(patient.patientId, [Validators.required]),
-          idPatient: new FormControl(patient.patienter.id, [Validators.required]),
+          idPatienter: new FormControl(patient.patienter.id, [Validators.required]),
           patienterId: new FormControl(patient.patienter.patienterId, [Validators.required]),
           patienterName: new FormControl(patient.patienter.patienterName, [Validators.required, Validators.pattern('^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$')]),
           hospitalize: new FormControl(patient.hospitalize, [Validators.required, checkStart]),
@@ -58,14 +58,15 @@ export class PatientEditComponent implements OnInit {
   editPatient(id: number): void {
     let patient: Patient;
 
-    this.patienterService.findById(this.patientForm.value.patienter).subscribe(patienter => {
+    this.patienterService.findById(this.patientForm.value.idPatienter).subscribe(patienter => {
       patienter = {
-        id: this.patientForm.value.id,
+        id: this.patientForm.value.idPatienter,
         patienterId: this.patientForm.value.patienterId,
         patienterName: this.patientForm.value.patienterName
       };
       patient = {
         id: this.patientForm.value.id,
+        patientId: this.patientForm.value.patientId,
         patienter: {
           id: patienter.id,
           patienterId: patienter.patienterId,
@@ -77,7 +78,7 @@ export class PatientEditComponent implements OnInit {
         treatments: this.patientForm.value.treatments,
         doctor: this.patientForm.value.doctor
       };
-      this.patienterService.editPatienter(patienter.id, patient).subscribe(() => {
+      this.patienterService.editPatienter(patienter.id, patienter).subscribe(() => {
       });
       this.patientService.editPatient(id, patient).subscribe(() => {
         this.router.navigate(['/']);

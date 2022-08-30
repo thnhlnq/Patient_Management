@@ -6,6 +6,16 @@
     <form [formGroup]="patientForm" style="text-align: center">
       <table style="display: inline-grid;">
         <tbody>
+
+<!--        <tr>-->
+<!--          <td>-->
+<!--            <div class="input-group flex-nowrap">-->
+<!--              <span class="input-group-text">Id <i>&nbsp;*</i></span>-->
+<!--              <input type="text" class="form-control" disabled formControlName="id"><br>-->
+<!--            </div>-->
+<!--          </td>-->
+<!--        </tr>-->
+
         <tr>
           <td>
             <div class="input-group flex-nowrap">
@@ -21,23 +31,36 @@
           </td>
         </tr>
 
+<!--        <tr>-->
+<!--          <td>-->
+<!--            <div class="input-group flex-nowrap">-->
+<!--              <span class="input-group-text">Id Patienter <i>&nbsp;*</i></span>-->
+<!--              <input type="text" class="form-control" disabled formControlName="idPatienter"><br>-->
+<!--            </div>-->
+<!--          </td>-->
+<!--        </tr>-->
+
         <tr>
           <td>
             <div class="input-group flex-nowrap">
-              <span class="input-group-text">Patienter Code <i>&nbsp;*</i></span>
-              <label style="width: 100%;">
-                <select class="form-select" formControlName="patienter">
-                  <option [defaultSelected]="patientForm" value="">-- Select Patienter --</option>
-                  <option *ngFor="let item of patienter" [ngValue]="item.id">{{item.patienterName}}</option>
-                </select>
-              </label>
+              <span class="input-group-text">Patienter Id <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" disabled formControlName="patienterId"><br>
             </div>
           </td>
         </tr>
 
         <tr>
           <td>
-            <p *ngIf="patientForm.controls.patienter.hasError('required') && patientForm.controls.patienter.touched && patientForm.controls.patienter.dirty">Patienter Can't Be Blank</p>
+            <p *ngIf="patientForm.controls.patienterId.hasError('required') && patientForm.controls.patienterId.touched && patientForm.controls.patienterId.dirty">Patienter Can't Be Blank</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="input-group flex-nowrap">
+              <span class="input-group-text">Patienter Name <i>&nbsp;*</i></span>
+              <input type="text" class="form-control" formControlName="patienterName"><br>
+            </div>
           </td>
         </tr>
 
@@ -123,9 +146,16 @@
         <tr>
           <td style="padding: 20px">
             <div class="vstack" style="display: inline">
-              <button style="border: none; background: none" class="m-5" [disabled]="!patientForm.valid" (click)="editPatient(id)">Edit
+              <button style="border: none; background: none" class="m-5" [disabled]="!patientForm.valid" (click)="editPatient(id)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil text-success" viewBox="0 0 16 16">
+                  <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                </svg>
               </button>
-              <a class="m-5" routerLink="/">Cancel</a>
+              <a class="m-5" routerLink="/">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </a>
             </div>
           </td>
         </tr>

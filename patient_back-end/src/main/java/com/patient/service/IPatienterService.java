@@ -9,5 +9,9 @@ public interface IPatienterService {
 
     List<Patienter> findAll();
 
+    void save(Patienter patienter);
+
     Optional<Patienter> findById(Integer id);
+
+    void edit(Patienter patienter);
 }

@@ -22,7 +22,7 @@ public class PatientService implements IPatientService {
 
     @Override
     public void save(Patient patient) {
-        patientRepository.save(patient);
+        patientRepository.save(patient.getPatientId(), patient.getPatienter().getId(), patient.getHospitalize(), patient.getDischarge(), patient.getReason(), patient.getTreatments(), patient.getDoctor());
     }
 
     @Override
@@ -32,12 +32,12 @@ public class PatientService implements IPatientService {
 
     @Override
     public void edit(Patient patient) {
-        patientRepository.save(patient);
+        patientRepository.edit(patient.getPatientId(), patient.getPatienter().getId(), patient.getHospitalize(), patient.getDischarge(), patient.getReason(), patient.getTreatments(), patient.getDoctor(), patient.getId());
     }
 
     @Override
     public void delete(Integer id) {
-        patientRepository.deleteById(id);
+        patientRepository.delete(id);
     }
 
     @Override
